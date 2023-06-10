@@ -20,7 +20,7 @@ import java.util.List;
 public class User implements UserDetails {
     @Id
     @GeneratedValue
-    private String id;
+    private int id;
     private String username;
     private String password;
     private String email;
