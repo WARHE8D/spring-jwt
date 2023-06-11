@@ -56,4 +56,17 @@ public class JwtService {
     public String generateToken(UserDetails ud){
         return generateToken(new HashMap<>(),ud);
     }
+
+    private boolean isTokenValid(String jwt,UserDetails ud){
+        final String userName = getUserName(jwt);
+        return (userName.equals(ud.getUsername())) && isTokenExpired(jwt);
+    }
+
+    private boolean isTokenExpired(String jwt) {
+        return getTokenExpiry(jwt).before(new Date());
+    }
+
+    private Date getTokenExpiry(String jwt) {
+        return extractClaim(jwt,Claims::getExpiration);
+    }
 }
