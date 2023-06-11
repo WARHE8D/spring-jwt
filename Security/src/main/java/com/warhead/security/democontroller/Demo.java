@@ -12,6 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class Demo {
     @GetMapping()
     public ResponseEntity<String> helo(){
-        return ResponseEntity.ok("just because you're secured, it doesn't mean that like i like you b-baka");
+        return ResponseEntity.ok("Just because you're secured, it doesn't mean that like i like you b-baka");
     }
 }
