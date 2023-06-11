@@ -17,7 +17,7 @@ import java.util.function.Function;
 @Service
 public class JwtService {
     private static final String SIGNING_KEY = "5558fbbba28bc468507aa45cbf2d74d286cf043ff4ccee9f531b5d8bc5586052";
-    public String getUserName(String jwt) {
+    public String getUsername(String jwt) {
     return extractClaim(jwt,Claims::getSubject);//subject will be the userName
     }
     public Claims extractAllClaims(String jwt){
@@ -41,7 +41,7 @@ public class JwtService {
     }
 
     //note: here the extractClaims is a map that stores multiple claims
-    private String generateToken(Map<String,Object> extractClaims, UserDetails userDetails){
+    public String generateToken(Map<String,Object> extractClaims, UserDetails userDetails){
         return Jwts
                 .builder()
                 .setClaims(extractClaims)
@@ -57,8 +57,8 @@ public class JwtService {
         return generateToken(new HashMap<>(),ud);
     }
 
-    private boolean isTokenValid(String jwt,UserDetails ud){
-        final String userName = getUserName(jwt);
+    public boolean isTokenValid(String jwt,UserDetails ud){
+        final String userName = getUsername(jwt);
         return (userName.equals(ud.getUsername())) && isTokenExpired(jwt);
     }
 
