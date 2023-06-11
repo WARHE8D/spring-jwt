@@ -30,6 +30,8 @@ public class AuthServiceImpl implements AuthService{
                 .firstName(request.getFirstname())
                 .lastName(request.getLastname())
                 .build();
+        repo.save(user);
+
         String token = jwtService.generateToken(user);
 
         return AuthResponse.builder()

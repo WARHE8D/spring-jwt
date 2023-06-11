@@ -18,14 +18,14 @@ import java.util.function.Function;
 public class JwtService {
     private static final String SIGNING_KEY = "5558fbbba28bc468507aa45cbf2d74d286cf043ff4ccee9f531b5d8bc5586052";
     public String getUsername(String jwt) {
-    return extractClaim(jwt,Claims::getSubject);//subject will be the userName
+    return extractClaim(jwt,Claims::getSubject);//subject will be the username
     }
     public Claims extractAllClaims(String jwt){
         return Jwts
                 .parserBuilder()
                 .setSigningKey(getSigningKey())
                 .build()
-                .parseClaimsJwt(jwt)
+                .parseClaimsJws(jwt)//this is not parseClaimsJwt but parseClaimsJws!!!
                 .getBody();
     }
 
@@ -59,7 +59,7 @@ public class JwtService {
 
     public boolean isTokenValid(String jwt,UserDetails ud){
         final String userName = getUsername(jwt);
-        return (userName.equals(ud.getUsername())) && isTokenExpired(jwt);
+        return (userName.equals(ud.getUsername())) && !isTokenExpired(jwt);
     }
 
     private boolean isTokenExpired(String jwt) {

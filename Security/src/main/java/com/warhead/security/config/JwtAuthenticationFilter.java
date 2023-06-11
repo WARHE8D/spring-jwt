@@ -28,7 +28,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         //first thing in this filter is to check weather the request contains token or not
         //token are always passed in headers
-        final String authHeader = request.getHeader("AuthVal");
+        final String authHeader = request.getHeader("Authorization");
         final String jwt;
         if(authHeader == null || !authHeader.startsWith("Bearer ")){
             filterChain.doFilter(request,response); //if no token call to next filter idk y

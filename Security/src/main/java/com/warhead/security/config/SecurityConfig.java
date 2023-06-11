@@ -24,7 +24,7 @@ public class SecurityConfig {
                 .csrf()//to disable csrf
                 .disable()
                 .authorizeHttpRequests()//for some request we dont need to authenticate tokens like in login or creating a new account so we whitelist those
-                .requestMatchers("/api/v1/auth")
+                .requestMatchers("/api/v1/auth/**")
                 .permitAll()//permits all matchers without authenticating
                 .anyRequest()// and all the rest of the requests
                 .authenticated()//needs to be authenticated
